@@ -1,95 +1,74 @@
-import Image from 'next/image'
+// import Image from 'next/image'
+// import styles from './page.module.css'
+
+// const Home=()=>{
+//   const productsDetails=[
+//     {
+//       id:1,
+//       productImage:'https://static-01.daraz.com.np/p/8e657f0ccabb8140080ef017ab210710.jpg',
+//       productTitle:'Hawkins Black Contura Pressure Cooker',
+//       price:5215
+//     },
+//     {
+//       id:2,
+//       productImage:'https://www.cgdigital.com.np/api/images/products/PySnQZ_1640164345-CG-QH80A05.webp',
+//       productTitle:'CG Quartz Heater: CGQH08A05',
+//       price:1340
+//     },
+//     {
+//       id:3,
+//       productImage:'https://www.cgdigital.com.np/api/images/products/9njGTG_1666002913-2.png',
+//       productTitle:'LG 7 Kg Front Load Washing Machine : FV1207S4W Online in Nepal - CG Digital',
+//       price:76890
+//     },
+//     {
+//       id:4,
+//       productImage:'https://www.cgdigital.com.np/api/images/products/oWpIqA_1637835240-026.webp',
+//       productTitle:'Buy CG Hot & Normal Water Dispenser CGWD15M02HN Online',
+//       price:3600
+//     },
+
+//   ]
+//   return (
+//     <>
+//       <div className={styles.main}>
+//         {productsDetails.map((item, id)=>(
+//           <div className={styles.card} key={id}>
+//             <img src={item.productImage} className={styles.productImage} />
+//             <h4>{item.productTitle}</h4>
+//             <p className={styles.price}>Price: Nrs {item.price}</p>
+//           </div>
+//         ))}
+//       </div>
+//       <input type='text' placeholder='username'/> <br/>
+//       <input type='password' placeholder='password'/> <br/>
+//       <button className={styles.btn} type='btn'>Login</button>
+//     </>
+//   )
+// }
+// export default Home
+
+'use client'
+import MainPage from '@/components/mainPage/page';
 import styles from './page.module.css'
-
-export default function Home() {
+import React, { useState } from 'react'
+import { GrLike } from "react-icons/gr";
+const LikeButton = () => {
+  const [likeCount, setLikeCount] = useState(0)
+  const isLiked = likeCount === 1;
+  const handleLikeCounter = () => {
+    setLikeCount(isLiked ? 0 : 1);
+  }
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <>
+      <MainPage>
+        <button className={isLiked ? styles.likeBtn : styles.unLikeBtn} onClick={handleLikeCounter}><GrLike />
+          {isLiked ? 'UnLike' : 'Like'}
+        </button>
+      </MainPage>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   )
 }
+
+export default LikeButton
