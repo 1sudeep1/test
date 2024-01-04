@@ -1,18 +1,21 @@
 'use client'
-import { changeCircle, changeSquare } from '@/redux/reducersSlice/boxCircleSlice'
+import { changeShape, changeWidth, changeColor, reset} from '@/redux/reducersSlice/boxCircleSlice'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector,} from 'react-redux'
 const BoxCircle = () => {
-    const value = useSelector((state) => state.boxCircle)
-    const dispatch= useDispatch();
+    const { backgroundColor, height, width, borderRadius } = useSelector((state) => state.boxCircle)
+    const dispatch = useDispatch();
+    const radius=width/2;
     return (
         <>
-            <div style={{ backgroundColor: value.backgroundColor, height: value.height, width: value.width, borderRadius: value.borderRadius+'%' }}>
-                BoxCircle
+            <div onClick={() => dispatch(changeShape())}
+                style={{ backgroundColor, height: height + 'px', width: width + 'px', borderRadius: borderRadius + '%' }}>
             </div>
-
-            <button onClick={()=>dispatch(changeCircle())}>Circle</button>
-            <button onClick={()=>dispatch(changeSquare())}>Square</button>
+            <h2>{(borderRadius==0)? `Area of square is ${width*height} sq.meter` : `Area of circle is ${(Math.PI*radius**2).toFixed(2)} sq.meter`}</h2>
+            <button onClick={()=>dispatch(changeWidth('inc'))}>inrease width</button>
+            <button onClick={()=>dispatch(changeWidth('dec'))}>decrease width</button><br />
+            <input type="text" placeholder='color-name' onChange={(e)=>dispatch(changeColor(e.target.value))} /> <br />
+            <button onClick={()=>dispatch(reset())}>Reset</button>
         </>
     )
 }

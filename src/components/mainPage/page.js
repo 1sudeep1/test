@@ -1,11 +1,14 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
-const MainPage = ({children}) => {
+const MainPage = ({ children }) => {
   return (
-    <div>
+    <>
+    <h2>Navbar</h2>
+      <div>
         {children}
-    </div>
+      </div>
+      <h2>Footer</h2>
+    </>
   )
 }
 
